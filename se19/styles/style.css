@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'Comic Neue';
+    src: url(../Comic_Neue/ComicNeue-Regular.ttf)
+}
+
+html {
+    font-family: "Comic Neue";
+}
+
+header {
+    padding: 8px 24px 8px 24px; 
+    display: flex; 
+    align-items: center; 
+    border-bottom: 2px solid #CDD2D3; 
+    flex-direction: row; 
+    justify-content: space-between;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    color: var(--Schemes-Inverse-Surface, #283133);
+    /* fwen/display/large */
+    font-size: 57px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 64px; /* 112.281% */
+    letter-spacing: -0.25px;
+}
+
+h3 {
+    color: var(--Schemes-Inverse-Surface, #283133);
+    color: var(--Schemes-Inverse-Surface, color(display-p3 0.1686 0.1922 0.2));
+    
+    /* fwen/headline/small */
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px; /* 133.333% */
+}
+
+
+input {
+    padding: 8px;
+}
+
+.primary-button {
+    background-color: #006874;
+    color: #ffffff; 
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.cat-flex-container{
+    display: block;
+    margin: auto;
+}
+
+.tab{
+    color: var(--Schemes-Inverse-Surface, #283133);
+    color: var(--Schemes-Inverse-Surface, color(display-p3 0.1686 0.1922 0.2));
+    text-align: center;
+
+/* fwen/title/small */
+    font-family: "Comic Neue";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.1px;
+}
+
+footer {
+    background-color: #283133;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.footer-link{
+    color: #dce4e5;
+}

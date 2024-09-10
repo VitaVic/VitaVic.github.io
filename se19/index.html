@@ -1,65 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="styles/style.css" rel="stylesheet" />
     <title>
-        Fwiendly Website
+        Fwiendly Coming Soon uwu
     </title>
-    <style>
-        @font-face {
-            font-family: 'Comic Neue';
-            src: url(Comic_Neue/ComicNeue-Regular.ttf)
-        }
-        h1 {
-            color: var(--Schemes-Inverse-Surface, #283133);
-            /* fwen/display/large */
-            font-family: "Comic Neue";
-            font-size: 57px;
-            font-style: normal;
-            font-weight: 800;
-            line-height: 64px; /* 112.281% */
-            letter-spacing: -0.25px;
-        }
-        h3 {
-            color: var(--Schemes-Inverse-Surface, #283133);
-            color: var(--Schemes-Inverse-Surface, color(display-p3 0.1686 0.1922 0.2));
-            
-            /* fwen/headline/small */
-            font-family: "Comic Neue";
-            font-size: 24px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 32px; /* 133.333% */
-        }
-    </style>
 </head>
-<body>
-    <div style="padding: 50px 75px 75px 75px; border-radius: 24px; border: 8px solid #283133;">
+
+<body style="background-color: #fff;">
+    <header>
+        <img src="images/Logo.png" alt="fwiendly Logo: Smiling cat with fwiendly text next to it."
+            style="height: 32px; width: auto;">
         <div>
-            <h1 style="line-height: normal;">
-                Stickews Coming Soon!
-            </h1>
-            <h3>
-                Enter your email to get notified and grab yourself a discount :)
-            </h3>
+            <a href="stickers.html">Stickers</a>
+            <a href="clothes.html">Clothes</a>
+            <a href="about.html">We are fwiendly!</a>
         </div>
-        <div>
-            <label for="email">Enter Email</label>
-            <input style="width: max-content;" type="email" placeholder="IwantStickewsSoBwad@fwiendly.com"/>
-            <button>Submit</button>
+        <div class="tab">
+            <button class="profile" onclick="openTab(event, 'Profile')">Profile</button>
+        </div>
+        </div>
+    </header>
+    <div class="content">
+        <div
+            style="padding: 4rem; margin: 2rem ; border-radius: 24px; border: 8px solid #283133; max-width: 55rem; min-width: 320px;">
+            <div>
+                <h1 style="line-height: normal;">
+                    Stickews Coming Soon!
+                </h1>
+                <h3>
+                    Enter your email to get notified and grab yourself a discount :)
+                </h3>
+            </div>
+            <div>
+                <label for="email">Enter Email</label>
+                <div style="display: inline-block ">
+                    <input style="width: max-content;" type="email" placeholder="iloveyou@fwiendly.com" />
+                    <button class="primary-button">Submit</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div>
-        <div class="flex-container" style="display: flex;">
-            <div>
-                1
-            </div>
-            <div>
-                2
-            </div>
-            <div>
-                3
-            </div>
-        </div>
-    </div>
+    <footer>
+        <a class="footer-link" href="legal.html">Impressum</a>
+        <a class="footer-link" target="_blank" href="https://www.instagram.com/fwiendly.shop">Instagram</a>
+    </footer>
+    <script src="scripts/main.js"></script>
 </body>
-</html> 
+
+</html>
