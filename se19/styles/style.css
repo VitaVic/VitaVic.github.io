@@ -7,6 +7,15 @@ html {
     font-family: "Comic Neue";
 }
 
+body{
+    background-color: #F5FAFB;
+    display: grid;
+    gap: 1em;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+ 
+
 header {
     padding: 8px 24px 8px 24px; 
     display: flex; 
@@ -16,13 +25,24 @@ header {
     justify-content: space-between;
 }
 
-.content{
-    display: flex;
-    justify-content: center;
+header:hover{
+    animation-name: headerHoverAnimation;
+    animation-duration: 150ms;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+}
+
+header > div > button {
+    background-color: #ffffff;
+}
+
+header > div > button:hover {
+    background-color: #ded5d5;
 }
 
 h1 {
-    color: var(--Schemes-Inverse-Surface, #283133);
+    color: #283133;
+
     /* fwen/display/large */
     font-size: 57px;
     font-style: normal;
@@ -32,8 +52,7 @@ h1 {
 }
 
 h3 {
-    color: var(--Schemes-Inverse-Surface, #283133);
-    color: var(--Schemes-Inverse-Surface, color(display-p3 0.1686 0.1922 0.2));
+    color:  #283133;
     
     /* fwen/headline/small */
     font-size: 24px;
@@ -41,7 +60,6 @@ h3 {
     font-weight: 400;
     line-height: 32px; /* 133.333% */
 }
-
 
 input {
     padding: 8px;
@@ -54,23 +72,40 @@ input {
     border-radius: 4px;
 }
 
-.cat-flex-container{
-    display: block;
-    margin: auto;
+.hero {
+    margin: 8.33%;
+    padding: 4.16%;    
+    border-radius: 24px; 
+    border: 8px solid #283133;
 }
 
-.tab{
-    color: var(--Schemes-Inverse-Surface, #283133);
-    color: var(--Schemes-Inverse-Surface, color(display-p3 0.1686 0.1922 0.2));
-    text-align: center;
+.sticker-showcase {
+    background-color: #EFF5F6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1rem;
+}
 
-/* fwen/title/small */
-    font-family: "Comic Neue";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 20px; /* 142.857% */
-    letter-spacing: 0.1px;
+.sticker-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.sticker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
+    background-color: #d5e5e8;
+    padding: 1.5rem;
+    box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
 }
 
 footer {
@@ -84,3 +119,175 @@ footer {
 .footer-link{
     color: #dce4e5;
 }
+
+header>div>a:link{
+    color: #283133;
+}
+
+header>div>a:visited{
+    color: #283133;
+}
+
+header>div>a:active{
+    color: #006874;
+    font-weight: bold;
+}
+
+.nav-logo-L {
+    height: 32px; 
+    width: auto;
+}
+
+.nav-logo-XS-M {
+    height: 32px; 
+    width: auto;
+}
+
+.plans-wrapper{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.plans-grid{
+    display: flex;
+    width: 55rem;
+    padding-top: 2.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.plan-step {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    align-self: stretch;
+}
+
+.plan-step>img{
+    width: 26.75rem;
+    height: 15.75981rem;
+    border-radius: 12px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* Test Animation for header */
+@keyframes headerHoverAnimation {
+    0% {box-shadow: 0px 0px 0px #28313312;}
+    100% {box-shadow: 0px 5px 5px #28313312;}
+}
+
+/* Screensizes are mainly taken from Material Design, since I designed my screens with it. */
+
+/* Compact (XS) (Smartphone Screensize) */
+@media screen and (max-width: 38em) {
+
+    .nav-logo-L{
+        display: none;
+    }
+
+    #nav-tabs{
+        display: none;
+    }
+
+    #switch{
+        display: none;
+    }
+
+    #profile-button{
+        display: none;
+    }
+
+    .sticker-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero{
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        margin: 1rem;
+        padding: 1.5rem 1rem 2.625rem 1rem;
+        border: 0px solid #283133;
+    }
+
+    .hero>div>h1{
+        font-size: 36px;
+    }
+    .hero>div>h3{
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .plans-grid{
+        width: 18rem;
+        gap: 3.75rem;
+    }
+
+    .plan-step{
+        flex-direction: column;
+    }
+
+    .plan-step>div{
+        width: 18rem;
+    }
+    .plan-step>img{
+        width: 18rem;
+        height: 10.60475rem;
+    }
+}
+
+/* Medium (M) (Tablet Screensize) */
+@media screen and (min-width: 38em) and (max-width: 80em) {
+
+    .nav-logo-L{
+        display: none;
+    }
+    
+    #profile-button{
+        display: none;
+    }
+
+    #switch{
+        display: none;
+    }
+
+    .sticker-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .plans-grid{
+        width: 26.75rem;
+        gap: 3.75rem;
+    }
+
+    .plan-step{
+        flex-direction: column;
+    }
+
+    .plan-step>div{
+        width: 26.75rem;
+    }
+}
+
+/* Large (L) (Desktop Screensize) */
+@media screen and (min-width: 80em) {
+
+    .nav-logo-XS-M{
+        display: none;
+    }
+
+    #menu-button {
+        display: none;
+    }
+
+    .hero{
+        margin-left: 16%;
+        margin-right: 16%;
+    }
+}
+
+/* Planned future size: Very Large (XL) (Widescreen etc.) */
