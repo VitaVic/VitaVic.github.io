@@ -2,6 +2,7 @@
 # Fwiendly is a website to buy fwiendly stickers.
 The MVP, however, will just be a landing page with a way to enter your email once the stickers are available.
 
+**The current development is in the "se19" folder, the Index.html file that exists in the main folder, is just a placeholder!**
 
 ## Things to note:
 
@@ -29,3 +30,5 @@ The MVP, however, will just be a landing page with a way to enter your email onc
 - All around the main part (nav, footer etc.) was copied into every file, so its consistent, I am aware that this is not the best way to do it.
 - I have not used git in like 3-4 years, so don't look into the commits thx hehe
 - In theory I already have a domain (fwiendly.com), but I will not upload it there yet, but I will once I have a sign-up list up and running (and also without any "sample pages")
+
+Have fun! :D
