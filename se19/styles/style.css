@@ -1,3 +1,25 @@
+:root{
+    --background: #F5FAFB;
+    --on-background: #171D1E;
+
+    --surface: #F5FAFB;
+    --on-surface: #171D1E;
+
+    --surface-variant: #DBE4E6;
+    --on-surface-variant: #3F484A;
+
+    --inverse-surface: #2B3133;
+    --inverse-on-surface: #ECF2F3;
+
+    --surface-container-low: #EFF5F6;
+
+    --primary: #006874;
+    --on-primary: #FFFFFF;
+
+    --outline: #6F797A;
+    --outline-variant: #BFC8CA;
+}
+
 @font-face {
     font-family: 'Comic Neue';
     src: url(../Comic_Neue/ComicNeue-Regular.ttf)
@@ -8,7 +30,7 @@ html {
 }
 
 body{
-    background-color: #F5FAFB;
+    background-color: var(--background);
     display: grid;
     gap: 1em;
     grid-template-rows: auto 1fr auto;
@@ -16,7 +38,7 @@ body{
 }
 
 h1 {
-    color: #283133;
+    color: var(--inverse-surface);
 
     /* fwen/display/large */
     font-size: 57px;
@@ -27,7 +49,7 @@ h1 {
 }
 
 h3 {
-    color:  #283133;
+    color: var(--inverse-surface);
     
     /* fwen/headline/small */
     font-size: 24px;
@@ -37,12 +59,12 @@ h3 {
 }
 
 input {
-    padding: 8px;
+    padding: 8px 12px;
 }
 
 .primary-button {
-    background-color: #006874;
-    color: #ffffff; 
+    background-color: var(--primary);
+    color: var(--on-primary); 
     padding: 8px 12px;
     border-radius: 4px;
 }
@@ -55,10 +77,10 @@ header {
     padding: 8px 24px 8px 24px;
     display: flex; 
     align-items: center; 
-    border-bottom: 2px solid #CDD2D3; 
+    border-bottom: 2px solid var(--outline-variant); 
     flex-direction: row; 
     justify-content: space-between;
-    background-color: #F5FAFB;
+    background-color: var(--surface);
 }
 
 header:hover{
@@ -69,23 +91,23 @@ header:hover{
 }
 
 header > div > button {
-    background-color: #ffffff;
+    background-color: var(--surface);
 }
 
 header > div > button:hover {
-    background-color: #ded5d5;
+    background-color: var(--surface-variant);
 }
 
 header>div>a:link{
-    color: #283133;
+    color: var(--inverse-surface);
 }
 
 header>div>a:visited{
-    color: #283133;
+    color: var(--inverse-surface);
 }
 
 header>div>a:active{
-    color: #006874;
+    color: var(--primary);
     font-weight: bold;
 }
 
@@ -106,11 +128,11 @@ header>div>a:active{
     margin: 8.33%;
     padding: 4.16%;    
     border-radius: 24px; 
-    border: 8px solid #283133;
+    border: 8px solid var(--inverse-surface);
 }
 
 .sticker-showcase {
-    background-color: #EFF5F6;
+    background-color: var(--surface-container-low);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -142,7 +164,7 @@ header>div>a:active{
 
 /* Footer */
 footer {
-    background-color: #283133;
+    background-color: var(--inverse-surface);
     padding: 1rem;
     display: flex;
     justify-content: center;
@@ -150,7 +172,7 @@ footer {
 }
 
 .footer-link{
-    color: #dce4e5;
+    color: var(--inverse-on-surface);
 }
 /* End Footer */
 
@@ -252,7 +274,7 @@ footer {
         align-content: center;
         margin: 1rem;
         padding: 1.5rem 1rem 2.625rem 1rem;
-        border: 0px solid #283133;
+        border: 0px solid var(--inverse-surface);
     }
 
     .hero>div>h1{
