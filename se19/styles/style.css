@@ -14,34 +14,6 @@ body{
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
 }
- 
-
-header {
-    position: sticky;
-    top: 0;
-    padding: 8px 24px 8px 24px;
-    display: flex; 
-    align-items: center; 
-    border-bottom: 2px solid #CDD2D3; 
-    flex-direction: row; 
-    justify-content: space-between;
-    background-color: #F5FAFB;
-}
-
-header:hover{
-    animation-name: headerHoverAnimation;
-    animation-duration: 150ms;
-    animation-iteration-count: 1;
-    animation-fill-mode: both;
-}
-
-header > div > button {
-    background-color: #ffffff;
-}
-
-header > div > button:hover {
-    background-color: #ded5d5;
-}
 
 h1 {
     color: #283133;
@@ -75,6 +47,61 @@ input {
     border-radius: 4px;
 }
 
+ 
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    padding: 8px 24px 8px 24px;
+    display: flex; 
+    align-items: center; 
+    border-bottom: 2px solid #CDD2D3; 
+    flex-direction: row; 
+    justify-content: space-between;
+    background-color: #F5FAFB;
+}
+
+header:hover{
+    animation-name: headerHoverAnimation;
+    animation-duration: 150ms;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+}
+
+header > div > button {
+    background-color: #ffffff;
+}
+
+header > div > button:hover {
+    background-color: #ded5d5;
+}
+
+header>div>a:link{
+    color: #283133;
+}
+
+header>div>a:visited{
+    color: #283133;
+}
+
+header>div>a:active{
+    color: #006874;
+    font-weight: bold;
+}
+
+.nav-logo-L {
+    height: 32px; 
+    width: auto;
+}
+
+.nav-logo-XS-M {
+    height: 32px; 
+    width: auto;
+}
+/* End Header */
+
+
+/* Landing Page */
 .hero {
     margin: 8.33%;
     padding: 4.16%;    
@@ -110,7 +137,10 @@ input {
     padding: 1.5rem;
     box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
 }
+/* End Landing Page */
 
+
+/* Footer */
 footer {
     background-color: #283133;
     padding: 1rem;
@@ -122,30 +152,10 @@ footer {
 .footer-link{
     color: #dce4e5;
 }
+/* End Footer */
 
-header>div>a:link{
-    color: #283133;
-}
 
-header>div>a:visited{
-    color: #283133;
-}
-
-header>div>a:active{
-    color: #006874;
-    font-weight: bold;
-}
-
-.nav-logo-L {
-    height: 32px; 
-    width: auto;
-}
-
-.nav-logo-XS-M {
-    height: 32px; 
-    width: auto;
-}
-
+/* Plans Page */
 .plans-wrapper{
     display: flex;
     flex-flow: column nowrap;
@@ -174,7 +184,10 @@ header>div>a:active{
     border-radius: 12px;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
 }
+/* End Plans Page */
 
+
+/* Sample Product Page */
 .product-page-wrapper{
     display: flex;
     flex-flow: column nowrap;
@@ -199,6 +212,7 @@ header>div>a:active{
     gap: 1rem;
     flex-direction: row;
 }
+/* End Sample Product Page */
 
 
 /* Test Animation for header */
@@ -207,8 +221,8 @@ header>div>a:active{
     100% {box-shadow: 0px 5px 5px #28313312;}
 }
 
-/* Screensizes are mainly taken from Material Design, since I designed my screens with it. */
 
+/* Screensizes are mainly taken from Material Design, since I designed my screens with it. */
 /* Compact (XS) (Smartphone Screensize) */
 @media screen and (max-width: 38em) {
 
