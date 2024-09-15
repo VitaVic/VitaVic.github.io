@@ -1,6 +1,6 @@
 
 # Fwiendly is a website to buy fwiendly stickers.
-The MVP, however, will just be a landing page with a way to enter your email once the stickers are avaible.
+The MVP, however, will just be a landing page with a way to enter your email once the stickers are available.
 
 
 ## Things to note:
@@ -23,8 +23,8 @@ The MVP, however, will just be a landing page with a way to enter your email onc
 - Just a simple responsive Product Page
 
 5. Other
-- I have left behind some comments in the CSS file for me and maybe for others to understand it better what I am trying to do and what is for what.
-- Sometimes you can find some comments in HTML files as well.
+- I have left behind some comments in the CSS file to make it more understandable what is used where
+- Sometimes you can find some comments in HTML files as well
 - I've used a mixture of grids and flex, just trying out things
 - All around the main part (nav, footer etc.) was copied into every file, so its consistent, I am aware that this is not the best way to do it.
 - I have not used git in like 3-4 years, so don't look into the commits thx hehe
