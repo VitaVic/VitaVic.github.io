@@ -2,30 +2,34 @@ import express, { response } from 'express'
 import { logger } from './middlewares/logger.mjs'
 
 const app = express();
-const PORT = 3000;
-const happy = {name: "Happy Sticker!", description: "Vewy happwy stickew, happwy mew!"}
-const sad = {name: "Sad Sticker :(", description: "Vewy sawd ://"}
-const stickers = {
-  happy,
-  sad,
-}
 
+app.set('view engine', 'ejs')
 app.use(logger)
-
 app.get('/', (request, response) => {
   response.send('Welcome to my Cat Sticker Shop Fwiendly!!')
 })
+
+const PORT = 3000;
+const happy = {name: "Happy Sticker!", description: "Vewy happwy stickew, happwy mew!"}
+const sad = {name: "Sad Sticker :(", description: "Vewy sawd ://"}
+const sample = {name: "Sample Text", description: "Sample Description"}
+const stickers = {
+  happy,
+  sad,
+  sample,
+}
+
 
 app.get('/stickers/:id', (request, response) => {
   const stickerId = request.params.id;
   const stickerName = stickers[`${stickerId}`].name;
   const stickerDescription = stickers[`${stickerId}`].description;
-
-  response.send(`The sticker is ${stickerId} \nname: ${stickerName} \ndescription: ${stickerDescription}`)
+  response.render('productpage', {stickerName: stickerName, stickerDescription: stickerDescription})
+  //response.send(`The sticker is ${stickerId} \nname: ${stickerName} \ndescription: ${stickerDescription}`)
 })
 
 app.get("/home", (request, response) => {
-  response.send('It feels like home...')
+  response.render('home')
 }) 
 
 app.get("/plans", (request, response) => {
