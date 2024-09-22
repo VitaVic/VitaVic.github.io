@@ -1,7 +1,13 @@
 import express, { response } from 'express'
 import { logger } from './middlewares/logger.mjs'
+import bodyParser from 'body-parser';
 
 const app = express();
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
+
 
 app.set('view engine', 'ejs')
 app.use(logger)
@@ -39,6 +45,12 @@ app.get("/plans", (request, response) => {
 
 app.get("/legal", (request, response) => {
   response.render('legal')
+})
+
+app.post("/home", (request, response) => {
+  const email = request.body['useremail']
+  console.log(email)
+  response.status(200).send("Email registered!")
 })
 
 app.listen(PORT, () => {
