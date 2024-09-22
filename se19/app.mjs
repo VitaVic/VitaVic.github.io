@@ -1,4 +1,5 @@
 import express, { response } from 'express'
+import { logger } from './middlewares/logger.mjs'
 
 const app = express();
 const PORT = 3000;
@@ -8,6 +9,8 @@ const stickers = {
   happy,
   sad,
 }
+
+app.use(logger)
 
 app.get('/', (request, response) => {
   response.send('Welcome to my Cat Sticker Shop Fwiendly!!')
