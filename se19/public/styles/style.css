@@ -31,6 +31,7 @@ html {
 
 body{
     background-color: var(--background);
+    margin: 0;
     display: grid;
     gap: 1em;
     grid-template-rows: auto 1fr auto;
