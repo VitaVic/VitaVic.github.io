@@ -37,6 +37,10 @@ app.get("/plans", (request, response) => {
   response.render('plans')
 })
 
+app.get("/legal", (request, response) => {
+  response.render('legal')
+})
+
 app.listen(PORT, () => {
   console.log(`Meow Meow!!\nWe are live on port: ${PORT}`)
 })
