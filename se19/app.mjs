@@ -5,6 +5,7 @@ const app = express();
 
 app.set('view engine', 'ejs')
 app.use(logger)
+app.use(express.static("public"));
 app.get('/', (request, response) => {
   response.send('Welcome to my Cat Sticker Shop Fwiendly!!')
 })
