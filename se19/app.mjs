@@ -30,10 +30,13 @@ app.get('/', (request, response) => {
 
 app.get('/stickers/:id', (request, response) => {
   const stickerId = request.params.id;
-  const stickerName = stickers[`${stickerId}`].name;
-  const stickerDescription = stickers[`${stickerId}`].description;
-  response.render('productpage', {stickerName: stickerName, stickerDescription: stickerDescription})
-  //response.send(`The sticker is ${stickerId} \nname: ${stickerName} \ndescription: ${stickerDescription}`)
+  if(stickerId in stickers){
+    const stickerName = stickers[`${stickerId}`].name;
+    const stickerDescription = stickers[`${stickerId}`].description;
+    response.render('productpage', {stickerName: stickerName, stickerDescription: stickerDescription})
+  } else {
+    response.render('error', {message: "404, Sticker not found :("})
+  }
 })
 
 app.get("/home", (request, response) => {
@@ -60,6 +63,10 @@ app.post("/home", (request, response) => {
   } else {
     console.log("is not Email")
   }
+})
+
+app.all('*', (request, response) => { 
+  response.render('error', {message: "404, page not found :("})
 })
 
 app.listen(PORT, () => {
