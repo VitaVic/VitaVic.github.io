@@ -3,7 +3,7 @@ import { logger } from './middlewares/logger.mjs'
 import bodyParser from 'body-parser';
 
 const app = express();
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
@@ -40,7 +40,7 @@ app.get('/stickers/:id', (request, response) => {
 })
 
 app.get("/home", (request, response) => {
-  response.render('home')
+  response.render('home', {message: ""})
 }) 
 
 app.get("/plans", (request, response) => {
@@ -51,17 +51,15 @@ app.get("/legal", (request, response) => {
   response.render('legal')
 })
 
-app.post("/home", (request, response) => {
-  response.sendStatus(200)
+app.post("/submit", (request, response) => {
   const email = request.body['useremail']
   const REGEMAIL = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm;
 
-  console.log(email)
-
   if(REGEMAIL.test(email) === true){
-    console.log("is an Email")
+    //TODO add email to database and return success
+    response.render('home', {message: "You are signed up! Thank u uwu"})
   } else {
-    console.log("is not Email")
+    response.render('home', {message: "Error: Not an email, please check and try again!"})
   }
 })
 

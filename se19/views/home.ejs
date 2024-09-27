@@ -8,7 +8,7 @@
     <main class="content">
         <div class="hero">
             <div>
-                <h1>
+                <h1 style="line-height: normal;">
                     Stickews Coming Soon!
                 </h1>   
                 <h3>
@@ -23,6 +23,9 @@
                         <button type="submit" class="primary-button">Submit</button>
                     </div>
                 </form>
+                <% if (message) { %>
+                    <p><%= message %></p>
+                <% } %>
             </div>
         </div>
         <div class="sticker-showcase">
