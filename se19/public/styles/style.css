@@ -47,6 +47,11 @@ h1 {
     font-weight: 800;
     line-height: 64px; /* 112.281% */
     letter-spacing: -0.25px;
+    margin: auto;
+}
+
+h2{
+    margin: auto;
 }
 
 h3 {
@@ -57,6 +62,7 @@ h3 {
     font-style: normal;
     font-weight: 400;
     line-height: 32px; /* 133.333% */
+    margin: auto;
 }
 
 input {
