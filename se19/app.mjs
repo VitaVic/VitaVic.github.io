@@ -14,6 +14,7 @@ app.use(logger)
 app.use(express.static("public"));
 
 const PORT = 3000;
+
 const happy = {name: "Happy Sticker!", description: "Vewy happwy stickew, happwy mew!"}
 const sad = {name: "Sad Sticker :(", description: "Vewy sawd ://"}
 const sample = {name: "Sample Text", description: "Sample Description"}
@@ -48,9 +49,17 @@ app.get("/legal", (request, response) => {
 })
 
 app.post("/home", (request, response) => {
+  response.sendStatus(200)
   const email = request.body['useremail']
+  const REGEMAIL = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm;
+
   console.log(email)
-  response.status(200).send("Email registered!")
+
+  if(REGEMAIL.test(email) === true){
+    console.log("is an Email")
+  } else {
+    console.log("is not Email")
+  }
 })
 
 app.listen(PORT, () => {
