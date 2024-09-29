@@ -188,6 +188,17 @@ footer {
 }
 /* End Footer */
 
+/* Feedback Bar */
+
+.feedback-bar{
+    margin-top: 1rem; 
+    padding: 1rem; 
+    background-color: var(--inverse-surface); 
+    color: var(--inverse-on-surface);
+    border-radius: 8px;
+}
+
+/* End Feedback Bar */
 
 /* Plans Page */
 .plans-wrapper{

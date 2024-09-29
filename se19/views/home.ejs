@@ -15,16 +15,18 @@
                     Enter your email to get notified and grab yourself a discount :)
                 </h3>
             </div>
-            <div>
+            <div style="width: 100%;">
                 <form action="/submit" method="post">
                     <label for="email">Email</label>
                     <div style="display: inline-block ">
-                        <input style="width: max-content;" id="email" placeholder="iloveyou@fwiendly.com" autocomplete="email" name="useremail" />
+                        <input type="email" style="width: max-content;" id="email" placeholder="iloveyou@fwiendly.com" name="useremail" autocomplete="email" required />
                         <button type="submit" class="primary-button">Submit</button>
                     </div>
-                </form>
+                </form> 
                 <% if (message) { %>
-                    <p><%= message %></p>
+                    <div class="feedback-bar">
+                        <p style="margin: auto;"><%= message %></p>
+                    </div>
                 <% } %>
             </div>
         </div>
