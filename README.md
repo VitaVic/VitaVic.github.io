@@ -20,9 +20,9 @@
 - If you enter anything else, it will redirect you to "/error" which is currently just a 404 page.
 
 ## Project structure
-Important: Everything important is under "/se19".
+Important: Everything is under "/se19".
 
-- Backend is under "/app-mjs".
+- Backend is under "/app.mjs".
 - Templates are under "/views/..."
 - CSS, images and fonts are under "/public/..."
 - Middleware is under "/middlewares/..."
