@@ -1,34 +1,32 @@
 
 # Fwiendly is a website to buy fwiendly stickers.
-The MVP, however, will just be a landing page with a way to enter your email once the stickers are available.
+**The current development is in the "se19" folder; the Index.html file that exists in the main folder is just a placeholder!**
 
-**The current development is in the "se19" folder, the Index.html file that exists in the main folder, is just a placeholder!**
+# Things to note
 
-## Things to note:
+## Technology used
 
-1. Navigation
-- Every breakpoint has a different menu. On smaller screensizes there is "menu-button" which should open a side-menu to show all hidden items. That, however, is not implemented yet.
-- In the future I also want to use real tabs (buttons) and not links, but without going into routing and javascript, that is not really feasable (I think).
+- Everything uses node, express, and some middleware.
+- To be able to run it on your device, run: **"npm ci" inside the /se19 folder** since node_modules is inside .gitignore
 
-2. The landing page
-- Without any functionality, just looks
-- On XS (mobile screen) the hero has no border, which is on purpose, since having a border on a small screen just means more space wasted.
-- in general the hero feels like it needs to be reworked. 
-- To show the responsiveness look at the stickers below.
+## Pages
+- "/" and "/home" is the homepage/landing page, where you can enter your email to sign up! If you like, you can try it out (it won't actually save your email yet tho)
+- "/plans" and "/legal" are just simple content pages.
+- "/stickers" has dynamic content loading!
+  - The default is "/stickers/sample" -> Just sample text
+  - "/stickers/happy" will have a simple happy message :)
+  - "/stickers/sad" will have a sad message :(
+  - Anything else will show you a 404 page with a custom message ;)
+- If you enter anything else, it will redirect you to "/error" which is currently just a 404 page.
 
-3. The Plan page
-- Just a way to make sense what I want to build, in which order etc.
-- I've created it because I did not know what to build.
+## Project structure
+Important: Everything important is under "/se19".
 
-4. Sample Product Page
-- Just a simple responsive Product Page
-
-5. Other
-- I have left behind some comments in the CSS file to make it more understandable what is used where
-- Sometimes you can find some comments in HTML files as well
-- I've used a mixture of grids and flex, just trying out things
-- All around the main part (nav, footer etc.) was copied into every file, so its consistent, I am aware that this is not the best way to do it.
-- I have not used git in like 3-4 years, so don't look into the commits thx hehe
-- In theory I already have a domain (fwiendly.com), but I will not upload it there yet, but I will once I have a sign-up list up and running (and also without any "sample pages")
+- Backend is under "/app-mjs".
+- Templates are under "/views/..."
+- CSS, images and fonts are under "/public/..."
+- Middleware is under "/middlewares/..."
+- Node modules are under "/node_modules/...". **You are not seeing it? Run npm ci in "/se19"**
+- All legacy pages (before templating) are under "/legacy/..."
 
 Have fun! :D
