@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('includes/head', {title: "Product | Fwiendly"}) %>
+
+<body>
+    <%- include('includes/header') %>
+    <main class="content">
+        <div class="product-page-wrapper">
+            <h1>Sample Product Page</h1>
+            <div class="product-info-wrapper">
+                <img src="../images/Sample Product Page.png" alt="Winking cat sticker">
+                <div class="product-info">
+                    <h2><%= stickerName %></h2>
+                    <p><%= stickerDescription %></p>
+                    <div class="product-info-buttons">
+                        <button class="primary-button">Buy</button>
+                        <button>Favourite</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+    <%- include('includes/footer') %>
+</body>
+
+</html>
