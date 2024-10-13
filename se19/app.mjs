@@ -1,47 +1,89 @@
 import express, { response } from 'express'
 import { logger } from './middlewares/logger.mjs'
+import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import { readablePrice } from './helpers/stickers-view.mjs';
+import { body } from 'express-validator';
+
 
 const app = express();
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
-})); 
-
+}));
 
 app.set('view engine', 'ejs')
 app.use(logger)
+mongoose.connect('mongodb://127.0.0.1:27017/stickershop')
+  .then(() => console.log('💽 Database connected'))
+  .catch(error => console.error(error))
 app.use(express.static("public"));
 
 const PORT = 3000;
 
-const happy = {name: "Happy Sticker!", description: "Vewy happwy stickew, happwy mew!"}
-const sad = {name: "Sad Sticker :(", description: "Vewy sawd ://"}
-const sample = {name: "Sample Text", description: "Sample Description"}
-const stickers = {
-  happy,
-  sad,
-  sample,
-}
+//Email Schema
+const emailSchema = new mongoose.Schema({
+  emailAddress: { type: String, required: true, unique: true }
+})
+const Email = mongoose.model('Email', emailSchema)
+
+//Sticker Schema
+const stickerSchema = new mongoose.Schema({
+  slug: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  priceInCents: { type: Number, required: true }
+})
+const Sticker = mongoose.model('Sticker', stickerSchema)
 
 app.get('/', (request, response) => {
   response.redirect('/home')
 })
 
-app.get('/stickers/:id', (request, response) => {
-  const stickerId = request.params.id;
-  if(stickerId in stickers){
-    const stickerName = stickers[`${stickerId}`].name;
-    const stickerDescription = stickers[`${stickerId}`].description;
-    response.render('productpage', {stickerName: stickerName, stickerDescription: stickerDescription})
-  } else {
-    response.render('error', {message: "404, Sticker not found :("})
+app.get('/new', (request, response) => {
+  response.render('create', { message: "" })
+})
+
+app.post('/newSticker', async (request, response) => {
+  try {
+    const sticker = new Sticker({
+      slug: request.body.slug,
+      name: request.body.name,
+      priceInCents: request.body.priceInCents,
+    })
+    await sticker.save()
+    response.render('create', { message: "Worky!" })
+  } catch (error) {
+    console.log(error)
+    response.render('create', { message: "Not worky :(" })
   }
 })
 
+app.get('/stickers', async (request, response) => {
+  const stickers = await Sticker.find({}).exec()
+
+  console.log(stickers[0])
+  response.render('products', { stickers: stickers, readablePrice: readablePrice })
+})
+
+app.get('/stickers/:id', async (request, response) => {
+  try {
+    const stickerId = request.params.id;
+    const sticker = await Sticker.findOne({ slug: stickerId }).exec()
+
+    if (sticker != null) {
+      response.render('productpage', { stickerName: sticker.name, stickerDescription: sticker.priceInCents })
+    }
+
+  } catch (error) {
+    console.log(error)
+    response.render('error', { message: "404, Sticker not found :(" })
+  }
+}
+)
+
 app.get("/home", (request, response) => {
-  response.render('home', {message: ""})
-}) 
+  response.render('home', { message: "" })
+})
 
 app.get("/plans", (request, response) => {
   response.render('plans')
@@ -51,20 +93,31 @@ app.get("/legal", (request, response) => {
   response.render('legal')
 })
 
-app.post("/submit", (request, response) => {
+app.post("/submit", async (request, response) => {
   const email = request.body['useremail']
   const REGEMAIL = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm;
 
-  if(REGEMAIL.test(email) === true){
-    //TODO add email to database and return success
-    response.render('home', {message: "You are signed up! Thank u uwu"})
+  if (REGEMAIL.test(email) === true) {
+    try {
+      const userEmail = new Email({
+        emailAddress: email
+      })
+
+      await userEmail.save()
+
+      response.render('home', { message: "You are signed up! Thank u uwu" })
+    } catch (error) {
+      console.log(error)
+      response.render('home', { message: "OnO something went wrong pwp Please try again later!" })
+    }
+
   } else {
-    response.render('home', {message: "Error: Not an email, please check and try again!"})
+    response.render('home', { message: "Error: Not an email, please check and try again!" })
   }
 })
 
-app.all('*', (request, response) => { 
-  response.render('error', {message: "404, page not found :("})
+app.all('*', (request, response) => {
+  response.render('error', { message: "404, page not found :(" })
 })
 
 app.listen(PORT, () => {
