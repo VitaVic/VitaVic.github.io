@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('includes/head', {title: "Stickers! | Fwiendly" }) %>
+
+    <body>
+        <%- include('includes/header') %>
+            <main class="content">
+                <div class="product-page-wrapper">
+                    <h1>Sample Product Page</h1>
+                    <div class="product-info-wrapper">
+                        <ul>
+                            <% for( let i=0; i < stickers.length; i++ ) { %>
+                                <% const sticker=stickers[i]; %>
+                                <li>
+                                    <% if(sticker.isInStock) { %>
+                                        <a href="/stickers/<%= sticker.slug %>">
+                                            <%= sticker.name %>: <%= readablePrice(sticker.priceInCents) %>
+                                        </a>
+                                    <% } else { %>
+                                        <%= sticker.name %> [SOLD OUT]
+                                    <% } %>
+                                </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+            <%- include('includes/footer') %>
+    </body>
+
+</html>
