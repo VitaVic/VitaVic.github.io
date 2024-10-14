@@ -31,7 +31,8 @@ const Email = mongoose.model('Email', emailSchema)
 const stickerSchema = new mongoose.Schema({
   slug: { type: String, required: true, unique: true },
   name: { type: String, required: true },
-  priceInCents: { type: Number, required: true }
+  priceInCents: { type: Number, required: true },
+  isInStock: {type: Boolean, default: true}
 })
 const Sticker = mongoose.model('Sticker', stickerSchema)
 
@@ -72,14 +73,15 @@ app.get('/stickers/:id', async (request, response) => {
 
     if (sticker != null) {
       response.render('productpage', { stickerName: sticker.name, stickerDescription: sticker.priceInCents })
+    } else {
+      response.render('error', { message: `404, ${stickerId} Sticker not found :(` })
     }
 
   } catch (error) {
     console.log(error)
     response.render('error', { message: "404, Sticker not found :(" })
   }
-}
-)
+})
 
 app.get("/home", (request, response) => {
   response.render('home', { message: "" })
