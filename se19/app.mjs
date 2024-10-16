@@ -32,7 +32,7 @@ const stickerSchema = new mongoose.Schema({
   slug: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   priceInCents: { type: Number, required: true },
-  isInStock: {type: Boolean, default: true}
+  isInStock: { type: Boolean, default: true }
 })
 const Sticker = mongoose.model('Sticker', stickerSchema)
 
@@ -52,23 +52,27 @@ app.post('/newSticker', async (request, response) => {
       priceInCents: request.body.priceInCents,
     })
     await sticker.save()
-    response.render('create', { message: "Worky!" })
+    response.render('create', { message: "Sticker has been created! :3" })
   } catch (error) {
     console.log(error)
-    response.render('create', { message: "Not worky :(" })
+    response.render('create', { message: "Something didn't work pwp" })
   }
 })
 
 app.get('/stickers', async (request, response) => {
-  const stickers = await Sticker.find({}).exec()
+  const stickerList = await Sticker.find({}).exec()
+  response.render('products', { stickers: stickerList, readablePrice: readablePrice })
+})
 
-  console.log(stickers[0])
+app.get('/stickers/search', async (request, response) => {
+  const searchQuery = request.query.q
+  const stickers = await Sticker.find({name: searchQuery}).exec()
   response.render('products', { stickers: stickers, readablePrice: readablePrice })
 })
 
 app.get('/stickers/:id', async (request, response) => {
   try {
-    const stickerId = request.params.id;
+    const stickerId = request.params.id
     const sticker = await Sticker.findOne({ slug: stickerId }).exec()
 
     if (sticker != null) {
@@ -79,7 +83,7 @@ app.get('/stickers/:id', async (request, response) => {
 
   } catch (error) {
     console.log(error)
-    response.render('error', { message: "404, Sticker not found :(" })
+    response.render('error', { message: "Something went wrong :(" })
   }
 })
 

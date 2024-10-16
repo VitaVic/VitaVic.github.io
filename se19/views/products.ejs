@@ -8,18 +8,29 @@
             <main class="content">
                 <div class="product-page-wrapper">
                     <h1>Sample Product Page</h1>
+                    <a href="/new">Create Sticker!</a>
+                    <form action="/stickers/search/" method="GET">
+                        <input name="q" placeholder="Search for stickers!" id="search" type="search">
+                        <button type="submit">Search</button>
+                    </form>
                     <div class="product-info-wrapper">
                         <ul>
-                            <% for( let i=0; i < stickers.length; i++ ) { %>
-                                <% const sticker=stickers[i]; %>
+                            <% if (stickers.length != 0) { %>
+                                <% for( let i=0; i < stickers.length; i++ ) { %>
+                                    <% const sticker=stickers[i]; %>
+                                    <li>
+                                        <% if(sticker.isInStock) { %>
+                                            <a href="/stickers/<%= sticker.slug %>">
+                                                <%= sticker.name %>: <%= readablePrice(sticker.priceInCents) %>
+                                            </a>
+                                        <% } else { %>
+                                            <%= sticker.name %> [SOLD OUT]
+                                        <% } %>
+                                    </li>
+                                <% } %>
+                            <% } else { %>
                                 <li>
-                                    <% if(sticker.isInStock) { %>
-                                        <a href="/stickers/<%= sticker.slug %>">
-                                            <%= sticker.name %>: <%= readablePrice(sticker.priceInCents) %>
-                                        </a>
-                                    <% } else { %>
-                                        <%= sticker.name %> [SOLD OUT]
-                                    <% } %>
+                                    <p>No sticker found :(</p>
                                 </li>
                             <% } %>
                         </ul>
