@@ -128,7 +128,7 @@ app.get('/stickers/:id', async (request, response) => {
     const sticker = await Sticker.findOne({ id: stickerId }).exec()
 
     if (sticker != null) {
-      response.render('productpage', { stickerName: sticker.name, stickerDescription: sticker.priceInCents })
+      response.render('productpage', { sticker: sticker, readablePrice: readablePrice })
     } else {
       response.render('error', { message: `404, ${stickerId} Sticker not found :(` })
     }

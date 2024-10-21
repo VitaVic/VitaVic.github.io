@@ -11,8 +11,8 @@
             <div class="product-info-wrapper">
                 <img src="../images/Sample Product Page.png" alt="Winking cat sticker">
                 <div class="product-info">
-                    <h2 style="margin: inherit;"><%= stickerName %></h2>
-                    <p><%= stickerDescription %></p>
+                    <h2 style="margin: inherit;"><%= sticker.name %></h2>
+                    <p><%= readablePrice(sticker.priceInCents) %></p>
                     <div class="product-info-buttons">
                         <button class="primary-button">Buy</button>
                         <button>Favourite</button>
