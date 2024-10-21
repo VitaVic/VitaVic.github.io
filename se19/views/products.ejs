@@ -15,12 +15,12 @@
                     </form>
                     <div>
                         <table id="product-table">
-                            <th>Sticker Name</th>
-                            <th>Slug</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Actions</th>
                             <% if (stickers.length != 0) { %>
+                                <th>Sticker Name</th>
+                                <th>Slug</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
                                 <% for( let i=0; i < stickers.length; i++ ) { %>
                                     <% const sticker=stickers[i]; %>
                                     <tr>
@@ -43,6 +43,11 @@
                                         </td>
                                     </tr>
                                 <% } %>
+                            <% } else {  %>
+                                <th>Oh no!</th>
+                                <tr>
+                                    <td>No Items in list. Maybe <a href="/create">cweate</a> one! :3</td>
+                                </tr>
                             <% } %>
                         </table>
                         <ol id="product-list">
@@ -67,6 +72,8 @@
                                         </ul>
                                     </li>
                                 <% } %>
+                            <% } else {  %>
+                                <li>No Items in list. Maybe <a href="/create">cweate</a> one! :3 </li>
                             <% } %>
                         </ol>
                     </div>
