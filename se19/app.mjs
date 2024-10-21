@@ -45,8 +45,7 @@ app.get("/home", (request, response) => {
   response.render('home', { message: "" })
 })
 
-//Email submission route
-app.post("/submit", async (request, response) => { 
+app.post("/submit", async (request, response) => {      //Email submission route
   const email = request.body['useremail']
   const REGEMAIL = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm;
 
@@ -69,21 +68,18 @@ app.post("/submit", async (request, response) => {
   }
 })
 
-//Sticker-list Route
-app.get('/stickers', async (request, response) => {
+app.get('/stickers', async (request, response) => {     // Sticker-list Route
   const stickerList = await Sticker.find({}).exec()
   response.render('products', { stickers: stickerList, readablePrice: readablePrice })
 })
 
-//Search on the sticker-list page
-app.get('/stickers/search', async (request, response) => {
+app.get('/stickers/search', async (request, response) => {      // Search on the sticker-list page
   const searchQuery = request.query.q
   const stickers = await Sticker.find({ name: searchQuery }).exec()
   response.render('products', { stickers: stickers, readablePrice: readablePrice })
 })
 
-//Sticker Product Page
-app.get('/stickers/:id', async (request, response) => {
+app.get('/stickers/:id', async (request, response) => {     // Sticker product page     
   try {
     const stickerId = request.params.id
     const sticker = await Sticker.findOne({ id: stickerId }).exec()
@@ -100,13 +96,11 @@ app.get('/stickers/:id', async (request, response) => {
   }
 })
 
-//Sticker creation page route
-app.get('/create', (request, response) => {
+app.get('/create', (request, response) => {     // Sticker creation page route
   response.render('create', { message: "" })
 })
 
-//Route to get sticker created
-app.post('/created', async (request, response) => {
+app.post('/created', async (request, response) => {     //Route to get sticker created
   try {
     const sticker = new Sticker({
       id: request.body.id,
@@ -127,8 +121,7 @@ app.post('/created', async (request, response) => {
   }
 })
 
-//Update sticker page route
-app.get('/edit/:id', async (request, response) => {
+app.get('/edit/:id', async (request, response) => {     //Update sticker page route
   try {
     const stickerId = request.params.id
     const sticker = await Sticker.findOne({ id: stickerId }).exec()
@@ -144,8 +137,7 @@ app.get('/edit/:id', async (request, response) => {
   }
 })
 
-//Route to get sticker updated
-app.post('/edited/:id', async (request, response) => {
+app.post('/edited/:id', async (request, response) => {      //Route to get sticker updated
   try {
     const stickerId = request.params.id
     const newStickerData = request.body
@@ -164,8 +156,7 @@ app.post('/edited/:id', async (request, response) => {
   }
 })
 
-//Route to get sticker deleted
-app.get('/delete/:id', async (request, response) => {
+app.get('/delete/:id', async (request, response) => {     //Route to get sticker deleted
   try {
     const stickerId = request.params.id
     await Sticker.findOneAndDelete({ id: stickerId })
