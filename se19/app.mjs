@@ -75,6 +75,17 @@ app.post('/edited/:slug', async (request, response) => {
   }
 })
 
+app.get('/delete/:slug', async (request, response) => {
+  try {
+    const stickerSlug = request.params.slug
+    await Sticker.findOneAndDelete( {slug: stickerSlug} )
+      .then(console.log(`${stickerSlug} has been deleted`))
+    response.redirect(`/stickers`)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 app.get('/create', (request, response) => {
   response.render('create', { message: "" })
 })
