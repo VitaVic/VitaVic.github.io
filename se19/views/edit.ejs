@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('includes/head', {title: "Create new Sticker"}) %>
+    <%- include('includes/head', {title: "Change Sticker"}) %>
 <body>
     <%- include('includes/header') %>
   <main class="content">
     <div style="display: flex; flex-flow: column; align-items: center;">
-      <h1>Create a new sticker</h2>
+      <h1>Edit Sticker</h2>
         <a href="/stickers">Sticker-list</a>
-        <form action="/created" method="POST">
-          <input type="text" name="name" placeholder="name" required /><br />
-          <input type="text" name="slug" placeholder="slug" required /><br />
-          <input type="number" name="priceInCents" placeholder="price in cents" required min="0" step="1" /><br />
+        <form action="/edited/<%= sticker.slug %>" method="POST">
+          <input type="text" name="name" placeholder="name" value="<%= sticker.name %>"/><br />
+          <input type="text" name="slug" placeholder="slug" value="<%= sticker.slug %>" /><br />
+          <input type="number" name="priceInCents" placeholder="price in cents" required min="0" step="1" value="<%= sticker.priceInCents %>" /><br />
           <button type="submit">Save</button>
         </form>
         <% if (message) { %>

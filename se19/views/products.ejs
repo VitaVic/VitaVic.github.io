@@ -21,11 +21,14 @@
                                     <li>
                                         <% if(sticker.isInStock) { %>
                                             <a href="/stickers/<%= sticker.slug %>">
-                                                <%= sticker.name %>: <%= readablePrice(sticker.priceInCents) %>
+                                                <%= sticker.name %> | <%= sticker.slug %>: <%= readablePrice(sticker.priceInCents) %>
                                             </a>
                                         <% } else { %>
                                             <%= sticker.name %> [SOLD OUT]
                                         <% } %>
+                                        <a href="/edit/<%= sticker.slug %>">
+                                            edit
+                                        </a>
                                     </li>
                                 <% } %>
                             <% } else { %>

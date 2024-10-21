@@ -1,6 +1,6 @@
 import express, { response } from 'express'
 import { logger } from './middlewares/logger.mjs'
-import mongoose from 'mongoose';
+import mongoose, { trusted } from 'mongoose';
 import bodyParser from 'body-parser';
 import { readablePrice } from './helpers/stickers-view.mjs';
 import { body } from 'express-validator';
@@ -40,22 +40,63 @@ app.get('/', (request, response) => {
   response.redirect('/home')
 })
 
+app.get('/edit/:slug', async(request, response) => {
+  try {
+    const stickerId = request.params.slug
+    const sticker = await Sticker.findOne({ slug: stickerId }).exec()
+
+    if (sticker != null) {
+      response.render('edit', { sticker: sticker, message: "" })
+    } else {
+      response.render('error', { message: `404, ${stickerId} Sticker not found :(` })
+    }
+  } catch (error) {
+    console.log(error)
+    response.render('error', { message: "Something went wrong :(" })
+  }
+})
+
+app.post('/edited/:slug', async (request, response) => {
+  try {
+    const stickerSlug = request.params.slug
+    const newStickerData = request.body
+    console.log(newStickerData)
+    const sticker = await Sticker.findOneAndUpdate( {slug: stickerSlug}, 
+      {
+        name: newStickerData.name,
+        slug: newStickerData.slug,
+        priceInCents: newStickerData.priceInCents
+      },
+      { new: true }
+    )
+    response.redirect(`/stickers/${sticker.slug}`)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 app.get('/new', (request, response) => {
   response.render('create', { message: "" })
 })
 
-app.post('/newSticker', async (request, response) => {
+app.post('/created', async (request, response) => {
   try {
     const sticker = new Sticker({
       slug: request.body.slug,
       name: request.body.name,
       priceInCents: request.body.priceInCents,
     })
-    await sticker.save()
+    await sticker.save().catch((error) => {
+      if (error.code === 11000) {
+        throw new Error(
+          `Slug ${request.body.name} already exists.`
+        )
+      }
+    })
     response.render('create', { message: "Sticker has been created! :3" })
   } catch (error) {
     console.log(error)
-    response.render('create', { message: "Something didn't work pwp" })
+    response.render('create', { message: error })
   }
 })
 
