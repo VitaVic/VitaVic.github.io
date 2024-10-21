@@ -6,37 +6,68 @@
     <body>
         <%- include('includes/header') %>
             <main class="content">
-                <div class="product-page-wrapper">
-                    <h1>Sample Product Page</h1>
+                <div id="product-list-page-wrapper">
+                    <h1>Product List</h1>
                     <a href="/new">Create Sticker!</a>
                     <form action="/stickers/search/" method="GET">
                         <input name="q" placeholder="Search for stickers!" id="search" type="search">
                         <button type="submit">Search</button>
                     </form>
-                    <div class="product-info-wrapper">
-                        <ul>
+                    <div>
+                        <table id="product-table">
+                            <th>Sticker Name</th>
+                            <th>Slug</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Actions</th>
+                            <% if (stickers.length != 0) { %>
+                                <% for( let i=0; i < stickers.length; i++ ) { %>
+                                    <% const sticker=stickers[i]; %>
+                                    <tr>
+                                        <td>
+                                            <%= sticker.name %>
+                                        </td>
+                                        <td>
+                                            <%= sticker.slug %>
+                                        </td>
+                                        <td>
+                                            <%= readablePrice(sticker.priceInCents) %>
+                                        </td>
+                                        <td>
+                                            <%= sticker.isInStock %>
+                                        </td>
+                                        <td>
+                                            <a href="/stickers/<%= sticker.slug %>">open</a>
+                                            <a href="/edit/<%= sticker.slug %>">edit</a>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            <% } %>
+                        </table>
+                        <ol id="product-list">
                             <% if (stickers.length != 0) { %>
                                 <% for( let i=0; i < stickers.length; i++ ) { %>
                                     <% const sticker=stickers[i]; %>
                                     <li>
-                                        <% if(sticker.isInStock) { %>
-                                            <a href="/stickers/<%= sticker.slug %>">
-                                                <%= sticker.name %> | <%= sticker.slug %>: <%= readablePrice(sticker.priceInCents) %>
-                                            </a>
-                                        <% } else { %>
-                                            <%= sticker.name %> [SOLD OUT]
-                                        <% } %>
-                                        <a href="/edit/<%= sticker.slug %>">
-                                            edit
-                                        </a>
+                                        <ul>
+                                            <li>
+                                                <%= sticker.name %>
+                                            </li>
+                                            <li>
+                                                <%= sticker.slug %>
+                                            </li>
+                                            <li>
+                                                <%= readablePrice(sticker.priceInCents) %>
+                                            </li>
+                                            <li>
+                                                <a href="/stickers/<%= sticker.slug %>">open</a>
+                                                <a href="/edit/<%= sticker.slug %>">edit</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 <% } %>
-                            <% } else { %>
-                                <li>
-                                    <p>No sticker found :(</p>
-                                </li>
                             <% } %>
-                        </ul>
+                        </ol>
                     </div>
                 </div>
             </main>
