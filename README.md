@@ -6,17 +6,16 @@
 
 ## Technology used
 
-- Everything uses node, express, and some middleware.
+- Everything uses node, express, some middleware and mongoDB.
 - To be able to run it on your device, run: **"npm ci" inside the /se19 folder** since node_modules is inside .gitignore
+- Only god knows how I connected to mongoDB (I am sure it's actually simple, but I can't recreate the process on my windows machine and that creates anxiety :)))))) )
 
 ## Pages
-- "/" and "/home" is the homepage/landing page, where you can enter your email to sign up! If you like, you can try it out (it won't actually save your email yet tho)
+- "/" and "/home" is the homepage/landing page, where you can enter your email to sign up! If you like, you can try it out!
 - "/plans" and "/legal" are just simple content pages.
-- "/stickers" has dynamic content loading!
-  - The default is "/stickers/sample" -> Just sample text
-  - "/stickers/happy" will have a simple happy message :)
-  - "/stickers/sad" will have a sad message :(
-  - Anything else will show you a 404 page with a custom message ;)
+- "/stickers" is the list of ALL the stickers that exist!
+  - Do none exist? Create some!
+  - Do some exist? Change them or delete them! The choice is yours!
 - If you enter anything else, it will redirect you to "/error" which is currently just a 404 page.
 
 ## Project structure
