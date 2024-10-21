@@ -17,7 +17,7 @@
                         <table id="product-table">
                             <% if (stickers.length != 0) { %>
                                 <th>Sticker Name</th>
-                                <th>Slug</th>
+                                <th>ID</th>
                                 <th>Price</th>
                                 <th>Stock</th>
                                 <th>Actions</th>
@@ -28,7 +28,7 @@
                                             <%= sticker.name %>
                                         </td>
                                         <td>
-                                            <%= sticker.slug %>
+                                            <%= sticker.id %>
                                         </td>
                                         <td>
                                             <%= readablePrice(sticker.priceInCents) %>
@@ -37,9 +37,9 @@
                                             <%= sticker.isInStock %>
                                         </td>
                                         <td>
-                                            <a href="/stickers/<%= sticker.slug %>">open</a>
-                                            <a href="/edit/<%= sticker.slug %>">edit</a>
-                                            <a href="/delete/<%= sticker.slug %>">delete</a>
+                                            <a href="/stickers/<%= sticker.id %>">open</a>
+                                            <a href="/edit/<%= sticker.id %>">edit</a>
+                                            <a href="/delete/<%= sticker.id %>">delete</a>
                                         </td>
                                     </tr>
                                 <% } %>
@@ -60,14 +60,14 @@
                                                 <%= sticker.name %>
                                             </li>
                                             <li>
-                                                <%= sticker.slug %>
+                                                <%= sticker.id %>
                                             </li>
                                             <li>
                                                 <%= readablePrice(sticker.priceInCents) %>
                                             </li>
                                             <li>
-                                                <a href="/stickers/<%= sticker.slug %>">open</a>
-                                                <a href="/edit/<%= sticker.slug %>">edit</a>
+                                                <a href="/stickers/<%= sticker.id %>">open</a>
+                                                <a href="/edit/<%= sticker.id %>">edit</a>
                                             </li>
                                         </ul>
                                     </li>

@@ -29,7 +29,7 @@ const Email = mongoose.model('Email', emailSchema)
 
 //Sticker Schema
 const stickerSchema = new mongoose.Schema({
-  slug: { type: String, required: true, unique: true },
+  id: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   priceInCents: { type: Number, required: true },
   isInStock: { type: Boolean, default: true }
@@ -40,10 +40,10 @@ app.get('/', (request, response) => {
   response.redirect('/home')
 })
 
-app.get('/edit/:slug', async(request, response) => {
+app.get('/edit/:id', async(request, response) => {
   try {
-    const stickerId = request.params.slug
-    const sticker = await Sticker.findOne({ slug: stickerId }).exec()
+    const stickerId = request.params.id
+    const sticker = await Sticker.findOne({ id: stickerId }).exec()
 
     if (sticker != null) {
       response.render('edit', { sticker: sticker, message: "" })
@@ -56,30 +56,30 @@ app.get('/edit/:slug', async(request, response) => {
   }
 })
 
-app.post('/edited/:slug', async (request, response) => {
+app.post('/edited/:id', async (request, response) => {
   try {
-    const stickerSlug = request.params.slug
+    const stickerId = request.params.id
     const newStickerData = request.body
     console.log(newStickerData)
-    const sticker = await Sticker.findOneAndUpdate( {slug: stickerSlug}, 
+    const sticker = await Sticker.findOneAndUpdate( {id: stickerId}, 
       {
         name: newStickerData.name,
-        slug: newStickerData.slug,
+        id: newStickerData.id,
         priceInCents: newStickerData.priceInCents
       },
       { new: true }
     )
-    response.redirect(`/stickers/${sticker.slug}`)
+    response.redirect(`/stickers/${sticker.id}`)
   } catch (error) {
     console.log(error)
   }
 })
 
-app.get('/delete/:slug', async (request, response) => {
+app.get('/delete/:id', async (request, response) => {
   try {
-    const stickerSlug = request.params.slug
-    await Sticker.findOneAndDelete( {slug: stickerSlug} )
-      .then(console.log(`${stickerSlug} has been deleted`))
+    const stickerId = request.params.id
+    await Sticker.findOneAndDelete( {id: stickerId} )
+      .then(console.log(`${stickerId} has been deleted`))
     response.redirect(`/stickers`)
   } catch (error) {
     console.log(error)
@@ -93,14 +93,14 @@ app.get('/create', (request, response) => {
 app.post('/created', async (request, response) => {
   try {
     const sticker = new Sticker({
-      slug: request.body.slug,
+      id: request.body.id,
       name: request.body.name,
       priceInCents: request.body.priceInCents,
     })
     await sticker.save().catch((error) => {
       if (error.code === 11000) {
         throw new Error(
-          `Slug ${request.body.name} already exists.`
+          `ID ${request.body.name} already exists.`
         )
       }
     })
@@ -125,7 +125,7 @@ app.get('/stickers/search', async (request, response) => {
 app.get('/stickers/:id', async (request, response) => {
   try {
     const stickerId = request.params.id
-    const sticker = await Sticker.findOne({ slug: stickerId }).exec()
+    const sticker = await Sticker.findOne({ id: stickerId }).exec()
 
     if (sticker != null) {
       response.render('productpage', { stickerName: sticker.name, stickerDescription: sticker.priceInCents })
