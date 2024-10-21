@@ -21,13 +21,12 @@ app.use(express.static("public"));
 
 const PORT = 3000;
 
-//Email Schema
+// <---- SCHEMAS ---->
 const emailSchema = new mongoose.Schema({
   emailAddress: { type: String, required: true, unique: true }
 })
 const Email = mongoose.model('Email', emailSchema)
 
-//Sticker Schema
 const stickerSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
   name: { type: String, required: true },
@@ -36,60 +35,77 @@ const stickerSchema = new mongoose.Schema({
 })
 const Sticker = mongoose.model('Sticker', stickerSchema)
 
+
+// <---- ROUTES ---->
 app.get('/', (request, response) => {
   response.redirect('/home')
 })
 
-app.get('/edit/:id', async(request, response) => {
+app.get("/home", (request, response) => {
+  response.render('home', { message: "" })
+})
+
+//Email submission route
+app.post("/submit", async (request, response) => { 
+  const email = request.body['useremail']
+  const REGEMAIL = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm;
+
+  if (REGEMAIL.test(email) === true) {
+    try {
+      const userEmail = new Email({
+        emailAddress: email
+      })
+
+      await userEmail.save()
+
+      response.render('home', { message: "You are signed up! Thank u uwu" })
+    } catch (error) {
+      console.log(error)
+      response.render('home', { message: "OnO something went wrong pwp Please try again later!" })
+    }
+
+  } else {
+    response.render('home', { message: "Error: Not an email, please check and try again!" })
+  }
+})
+
+//Sticker-list Route
+app.get('/stickers', async (request, response) => {
+  const stickerList = await Sticker.find({}).exec()
+  response.render('products', { stickers: stickerList, readablePrice: readablePrice })
+})
+
+//Search on the sticker-list page
+app.get('/stickers/search', async (request, response) => {
+  const searchQuery = request.query.q
+  const stickers = await Sticker.find({ name: searchQuery }).exec()
+  response.render('products', { stickers: stickers, readablePrice: readablePrice })
+})
+
+//Sticker Product Page
+app.get('/stickers/:id', async (request, response) => {
   try {
     const stickerId = request.params.id
     const sticker = await Sticker.findOne({ id: stickerId }).exec()
 
     if (sticker != null) {
-      response.render('edit', { sticker: sticker, message: "" })
+      response.render('productpage', { sticker: sticker, readablePrice: readablePrice })
     } else {
       response.render('error', { message: `404, ${stickerId} Sticker not found :(` })
     }
+
   } catch (error) {
     console.log(error)
     response.render('error', { message: "Something went wrong :(" })
   }
 })
 
-app.post('/edited/:id', async (request, response) => {
-  try {
-    const stickerId = request.params.id
-    const newStickerData = request.body
-    console.log(newStickerData)
-    const sticker = await Sticker.findOneAndUpdate( {id: stickerId}, 
-      {
-        name: newStickerData.name,
-        id: newStickerData.id,
-        priceInCents: newStickerData.priceInCents
-      },
-      { new: true }
-    )
-    response.redirect(`/stickers/${sticker.id}`)
-  } catch (error) {
-    console.log(error)
-  }
-})
-
-app.get('/delete/:id', async (request, response) => {
-  try {
-    const stickerId = request.params.id
-    await Sticker.findOneAndDelete( {id: stickerId} )
-      .then(console.log(`${stickerId} has been deleted`))
-    response.redirect(`/stickers`)
-  } catch (error) {
-    console.log(error)
-  }
-})
-
+//Sticker creation page route
 app.get('/create', (request, response) => {
   response.render('create', { message: "" })
 })
 
+//Route to get sticker created
 app.post('/created', async (request, response) => {
   try {
     const sticker = new Sticker({
@@ -111,36 +127,53 @@ app.post('/created', async (request, response) => {
   }
 })
 
-app.get('/stickers', async (request, response) => {
-  const stickerList = await Sticker.find({}).exec()
-  response.render('products', { stickers: stickerList, readablePrice: readablePrice })
-})
-
-app.get('/stickers/search', async (request, response) => {
-  const searchQuery = request.query.q
-  const stickers = await Sticker.find({name: searchQuery}).exec()
-  response.render('products', { stickers: stickers, readablePrice: readablePrice })
-})
-
-app.get('/stickers/:id', async (request, response) => {
+//Update sticker page route
+app.get('/edit/:id', async (request, response) => {
   try {
     const stickerId = request.params.id
     const sticker = await Sticker.findOne({ id: stickerId }).exec()
 
     if (sticker != null) {
-      response.render('productpage', { sticker: sticker, readablePrice: readablePrice })
+      response.render('edit', { sticker: sticker, message: "" })
     } else {
       response.render('error', { message: `404, ${stickerId} Sticker not found :(` })
     }
-
   } catch (error) {
     console.log(error)
     response.render('error', { message: "Something went wrong :(" })
   }
 })
 
-app.get("/home", (request, response) => {
-  response.render('home', { message: "" })
+//Route to get sticker updated
+app.post('/edited/:id', async (request, response) => {
+  try {
+    const stickerId = request.params.id
+    const newStickerData = request.body
+    console.log(newStickerData)
+    const sticker = await Sticker.findOneAndUpdate({ id: stickerId },
+      {
+        name: newStickerData.name,
+        id: newStickerData.id,
+        priceInCents: newStickerData.priceInCents
+      },
+      { new: true }
+    )
+    response.redirect(`/stickers/${sticker.id}`)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+//Route to get sticker deleted
+app.get('/delete/:id', async (request, response) => {
+  try {
+    const stickerId = request.params.id
+    await Sticker.findOneAndDelete({ id: stickerId })
+      .then(console.log(`${stickerId} has been deleted`))
+    response.redirect(`/stickers`)
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 app.get("/plans", (request, response) => {
@@ -149,29 +182,6 @@ app.get("/plans", (request, response) => {
 
 app.get("/legal", (request, response) => {
   response.render('legal')
-})
-
-app.post("/submit", async (request, response) => {
-  const email = request.body['useremail']
-  const REGEMAIL = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm;
-
-  if (REGEMAIL.test(email) === true) {
-    try {
-      const userEmail = new Email({
-        emailAddress: email
-      })
-
-      await userEmail.save()
-
-      response.render('home', { message: "You are signed up! Thank u uwu" })
-    } catch (error) {
-      console.log(error)
-      response.render('home', { message: "OnO something went wrong pwp Please try again later!" })
-    }
-
-  } else {
-    response.render('home', { message: "Error: Not an email, please check and try again!" })
-  }
 })
 
 app.all('*', (request, response) => {
