@@ -75,7 +75,7 @@ app.post('/edited/:slug', async (request, response) => {
   }
 })
 
-app.get('/new', (request, response) => {
+app.get('/create', (request, response) => {
   response.render('create', { message: "" })
 })
 
