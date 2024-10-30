@@ -3,6 +3,7 @@ import { logger } from './middlewares/logger.mjs'
 import mongoose, { trusted } from 'mongoose';
 import bodyParser from 'body-parser';
 import { readablePrice } from './helpers/stickers-view.mjs';
+import 'dotenv/config';
 import { body } from 'express-validator';
 
 
@@ -14,12 +15,10 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 app.set('view engine', 'ejs')
 app.use(logger)
-mongoose.connect('mongodb://127.0.0.1:27017/stickershop')
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('💽 Database connected'))
   .catch(error => console.error(error))
 app.use(express.static("public"));
-
-const PORT = 3000;
 
 // <---- SCHEMAS ---->
 const emailSchema = new mongoose.Schema({
@@ -179,6 +178,6 @@ app.all('*', (request, response) => {
   response.render('error', { message: "404, page not found :(" })
 })
 
-app.listen(PORT, () => {
-  console.log(`Meow Meow!!\nWe are live on port: ${PORT}`)
+app.listen(process.env.PORT, () => {
+  console.log(`Meow Meow!!\nWe are live on port: ${process.env.PORT}`)
 })
