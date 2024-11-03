@@ -96,7 +96,14 @@ app.get('/stickers/:id', async (request, response) => {     // Sticker product p
 })
 
 app.get('/create', (request, response) => {     // Sticker creation page route
-  response.render('create', { message: "" })
+  response.render('create', { message: "", isAuthenticated: false })
+})
+
+app.post('/create/auth', async (request, response) => {
+  const input = request.body['pwd']
+  if (input === process.env.ADMINPWD) {
+    response.render('create', { message: "", isAuthenticated: true })
+  }
 })
 
 app.post('/created', async (request, response) => {     //Route to get sticker created
@@ -113,10 +120,10 @@ app.post('/created', async (request, response) => {     //Route to get sticker c
         )
       }
     })
-    response.render('create', { message: "Sticker has been created! :3" })
+    response.render('create', { message: "Sticker has been created! :3", isAuthenticated: true })
   } catch (error) {
     console.log(error)
-    response.render('create', { message: error })
+    response.render('create', { message: error, isAuthenticated: true })
   }
 })
 
@@ -126,13 +133,22 @@ app.get('/edit/:id', async (request, response) => {     //Update sticker page ro
     const sticker = await Sticker.findOne({ id: stickerId }).exec()
 
     if (sticker != null) {
-      response.render('edit', { sticker: sticker, message: "" })
+      response.render('edit', { sticker: sticker, message: "", isAuthenticated: false })
     } else {
       response.render('error', { message: `404, ${stickerId} Sticker not found :(` })
     }
   } catch (error) {
     console.log(error)
     response.render('error', { message: "Something went wrong :(" })
+  }
+})
+
+app.post('/edit/:id/auth', async (request, response) => {
+  const input = request.body['pwd']
+  if (input === process.env.ADMINPWD) {
+    const stickerId = request.params.id
+    const sticker = await Sticker.findOne({ id: stickerId }).exec()
+    response.render('edit', { sticker: sticker, message: "", isAuthenticated: true })
   }
 })
 
@@ -180,7 +196,6 @@ app.get('/admin', async (request, response) => {     // Sticker-list Route
 
 app.post('/admin/auth', async (request, response) => {
   const input = request.body['pwd']
-  console.log(input)
   if (input === process.env.ADMINPWD) {
     const stickerList = await Sticker.find({}).exec()
     response.render('adminpanel', { stickers: stickerList, readablePrice: readablePrice, isAuthenticated: true })
