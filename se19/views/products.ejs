@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('includes/head', {title: "Stickers! | Fwiendly" }) %>
+
+    <body>
+        <%- include('includes/header') %>
+            <main class="content">
+                <div id="product-list-page-wrapper">
+                    <h1>Stickers!</h1>
+                    <form action="/stickers/search/" method="GET">
+                        <input name="q" placeholder="Search for stickers!" id="search" type="search">
+                        <button type="submit">Search</button>
+                    </form>
+                    <div>
+                        <table id="product-table">
+                            <% if (stickers.length != 0) { %>
+                                <th>Sticker Name</th>
+                                <th>ID</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                                <% for( let i=0; i < stickers.length; i++ ) { %>
+                                    <% const sticker=stickers[i]; %>
+                                    <tr>
+                                        <td>
+                                            <%= sticker.name %>
+                                        </td>
+                                        <td>
+                                            <%= sticker.id %>
+                                        </td>
+                                        <td>
+                                            <%= readablePrice(sticker.priceInCents) %>
+                                        </td>
+                                        <td>
+                                            <%= sticker.isInStock %>
+                                        </td>
+                                        <td>
+                                            <a href="/stickers/<%= sticker.id %>">open</a>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            <% } else {  %>
+                                <th>Oh no!</th>
+                                <tr>
+                                    <td>Quite empty in here.<br>Maybe someone forgot to stock up the store front qwq</td>
+                                </tr>
+                            <% } %>
+                        </table>
+                        <ol id="product-list">
+                            <% if (stickers.length != 0) { %>
+                                <% for( let i=0; i < stickers.length; i++ ) { %>
+                                    <% const sticker=stickers[i]; %>
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                <%= sticker.name %>
+                                            </li>
+                                            <li>
+                                                <%= sticker.id %>
+                                            </li>
+                                            <li>
+                                                <%= readablePrice(sticker.priceInCents) %>
+                                            </li>
+                                            <li>
+                                                <a href="/stickers/<%= sticker.id %>">open</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <% } %>
+                            <% } else {  %>
+                                <li>Quite empty in here.<br>Maybe someone forgot to stock up the store front qwq </li>
+                            <% } %>
+                        </ol>
+                    </div>
+                </div>
+            </main>
+            <%- include('includes/footer') %>
+    </body>
+
+</html>

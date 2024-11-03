@@ -1,0 +1,448 @@
+:root{
+    --background: #F5FAFB;
+    --on-background: #171D1E;
+
+    --surface: #F5FAFB;
+    --on-surface: #171D1E;
+
+    --surface-variant: #DBE4E6;
+    --on-surface-variant: #3F484A;
+
+    --inverse-surface: #2B3133;
+    --inverse-on-surface: #ECF2F3;
+
+    --surface-container-low: #EFF5F6;
+
+    --primary: #006874;
+    --on-primary: #FFFFFF;
+
+    --outline: #6F797A;
+    --outline-variant: #BFC8CA;
+}
+
+@font-face {
+    font-family: 'Comic Neue';
+    src: url(../Comic_Neue/ComicNeue-Regular.ttf)
+}
+
+html {
+    font-family: "Comic Neue";
+}
+
+body{
+    background-color: var(--background);
+    margin: 0;
+    display: grid;
+    gap: 1em;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+h1 {
+    color: var(--inverse-surface);
+
+    /* fwen/display/large */
+    font-size: 57px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 64px; /* 112.281% */
+    letter-spacing: -0.25px;
+    margin: auto;
+}
+
+h2{
+    margin: auto;
+}
+
+h3 {
+    color: var(--inverse-surface);
+    
+    /* fwen/headline/small */
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px; /* 133.333% */
+    margin: auto;
+}
+
+input {
+    padding: 8px 12px;
+}
+
+th {
+    font-weight: bold;
+    text-align: left;
+}
+
+.primary-button {
+    background-color: var(--primary);
+    color: var(--on-primary); 
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+ 
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    padding: 8px 24px 8px 24px;
+    display: flex; 
+    align-items: center; 
+    border-bottom: 2px solid var(--outline-variant); 
+    flex-direction: row; 
+    justify-content: space-between;
+    background-color: var(--surface);
+}
+
+header:hover{
+    animation-name: headerHoverAnimation;
+    animation-duration: 150ms;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+}
+
+header > div > button {
+    background-color: var(--surface);
+}
+
+header > div > button:hover {
+    background-color: var(--surface-variant);
+}
+
+header>div>a:link{
+    color: var(--inverse-surface);
+}
+
+header>div>a:visited{
+    color: var(--inverse-surface);
+}
+
+header>div>a:active{
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.nav-logo-L {
+    height: 32px; 
+    width: auto;
+}
+
+.nav-logo-XS-M {
+    height: 32px; 
+    width: auto;
+}
+/* End Header */
+
+
+/* Landing Page */
+.hero {
+    display: flex;
+    flex-direction: column; 
+    flex-wrap: nowrap; 
+    align-items: flex-start;
+    margin: 8.33%;
+    padding: 4.16%;    
+    border-radius: 24px; 
+    border: 8px solid var(--inverse-surface);
+    gap: 2.625rem;
+}
+
+.sticker-showcase {
+    background-color: var(--surface-container-low);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1rem;
+}
+
+.sticker-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.sticker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
+    background-color: #d5e5e8;
+    padding: 1.5rem;
+    box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
+}
+/* End Landing Page */
+
+
+/* Footer */
+footer {
+    background-color: var(--inverse-surface);
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.footer-link{
+    color: var(--inverse-on-surface);
+}
+/* End Footer */
+
+/* Feedback Bar */
+
+.feedback-bar{
+    margin-top: 1rem; 
+    padding: 1rem; 
+    background-color: var(--inverse-surface); 
+    color: var(--inverse-on-surface);
+    border-radius: 8px;
+}
+
+/* End Feedback Bar */
+
+/* Plans Page */
+.plans-wrapper{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.plans-grid{
+    display: flex;
+    width: 55rem;
+    padding-top: 2.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.plan-step {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    align-self: stretch;
+}
+
+.plan-step>img{
+    width: 26.75rem;
+    height: 15.75981rem;
+    border-radius: 12px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
+/* End Plans Page */
+
+
+/* Sample Product Page */
+.product-page-wrapper{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.product-info-wrapper{
+    width: 55rem;
+    gap: 6.1875rem;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.product-info{
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-direction: column;
+}
+
+.product-info-buttons{
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+}
+/* End Sample Product Page */
+
+#product-list-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+#product-list {
+    display: grid;
+    gap: 1rem;
+    justify-content: start;
+}
+
+
+/* Error Page */
+.error-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+/* End Error Page */
+
+/* Test Animation for header */
+@keyframes headerHoverAnimation {
+    0% {box-shadow: 0px 0px 0px #28313312;}
+    100% {box-shadow: 0px 5px 5px #28313312;}
+}
+
+
+/* Screensizes are mainly taken from Material Design, since I designed my screens with it. */
+/* Compact (XS) (Smartphone Screensize) */
+@media screen and (max-width: 38em) {
+
+    .nav-logo-L{
+        display: none;
+    }
+
+    #nav-tabs{
+        display: none;
+    }
+
+    #switch{
+        display: none;
+    }
+
+    #profile-button{
+        display: none;
+    }
+
+    .sticker-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero{
+        justify-content: center;
+        align-items: flex-start;
+        align-content: start;
+        margin: 1rem;
+        padding: 1.5rem 1rem 2.625rem 1rem;
+        border: 0px solid var(--inverse-surface);
+        gap: 1.5rem;
+    }
+
+    .hero>div>h1{
+        font-size: 36px;
+    }
+    .hero>div>h3{
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .plans-grid{
+        width: 18rem;
+        gap: 3.75rem;
+    }
+
+    .plan-step{
+        flex-direction: column;
+    }
+
+    .plan-step>div{
+        width: 18rem;
+    }
+    .plan-step>img{
+        width: 18rem;
+        height: 10.60475rem;
+    }
+
+    .product-page-wrapper>h1{
+        text-align: center;
+    }
+
+    .product-info-wrapper{
+        width: 18rem;
+        gap: 2rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-info-wrapper>img{
+        width: 18rem;
+        height: 18rem;
+    }
+    #product-table{
+        display: none;
+    }
+}
+
+/* Medium (M) (Tablet Screensize) */
+@media screen and (min-width: 38em) and (max-width: 80em) {
+
+    .nav-logo-L{
+        display: none;
+    }
+    
+    #profile-button{
+        display: none;
+    }
+
+    #switch{
+        display: none;
+    }
+
+    .sticker-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .plans-grid{
+        width: 26.75rem;
+        gap: 3.75rem;
+    }
+
+    .plan-step{
+        flex-direction: column;
+    }
+
+    .plan-step>div{
+        width: 26.75rem;
+    }
+
+    .product-info-wrapper{
+        width: 33.5rem;
+        gap: 2rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-info-wrapper>img{
+        width: 24.875rem;
+        height: 24.875rem;
+    }
+
+    #product-list{
+        display: none;
+    }
+}
+
+/* Large (L) (Desktop Screensize) */
+@media screen and (min-width: 80em) {
+
+    .nav-logo-XS-M{
+        display: none;
+    }
+
+    #menu-button {
+        display: none;
+    }
+
+    .hero{
+        margin-left: 16%;
+        margin-right: 16%;
+    }
+
+    #product-list{
+        display: none;
+    }
+}
+
+/* Planned future size: Very Large (XL) (Widescreen etc.) */
