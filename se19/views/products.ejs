@@ -7,8 +7,7 @@
         <%- include('includes/header') %>
             <main class="content">
                 <div id="product-list-page-wrapper">
-                    <h1>Product List</h1>
-                    <a href="/create">Create Sticker!</a>
+                    <h1>Stickers!</h1>
                     <form action="/stickers/search/" method="GET">
                         <input name="q" placeholder="Search for stickers!" id="search" type="search">
                         <button type="submit">Search</button>
@@ -38,15 +37,13 @@
                                         </td>
                                         <td>
                                             <a href="/stickers/<%= sticker.id %>">open</a>
-                                            <a href="/edit/<%= sticker.id %>">edit</a>
-                                            <a href="/delete/<%= sticker.id %>">delete</a>
                                         </td>
                                     </tr>
                                 <% } %>
                             <% } else {  %>
                                 <th>Oh no!</th>
                                 <tr>
-                                    <td>No Items in list. Maybe <a href="/create">cweate</a> one! :3</td>
+                                    <td>Quite empty in here.<br>Maybe someone forgot to stock up the store front qwq</td>
                                 </tr>
                             <% } %>
                         </table>
@@ -67,13 +64,12 @@
                                             </li>
                                             <li>
                                                 <a href="/stickers/<%= sticker.id %>">open</a>
-                                                <a href="/edit/<%= sticker.id %>">edit</a>
                                             </li>
                                         </ul>
                                     </li>
                                 <% } %>
                             <% } else {  %>
-                                <li>No Items in list. Maybe <a href="/create">cweate</a> one! :3 </li>
+                                <li>Quite empty in here.<br>Maybe someone forgot to stock up the store front qwq </li>
                             <% } %>
                         </ol>
                     </div>

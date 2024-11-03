@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('includes/head', {title: "Stickers! | Fwiendly" }) %>
+
+    <body>
+        <%- include('includes/header') %>
+            <main class="content">
+                <div id="product-list-page-wrapper">
+                    <% if (isAuthenticated===true) { %>
+                        <h1>Product List</h1>
+                        <a href="/create">Create Sticker!</a>
+                        <form action="/stickers/search/" method="GET">
+                            <input name="q" placeholder="Search for stickers!" id="search" type="search">
+                            <button type="submit">Search</button>
+                        </form>
+                        <div>
+                            <table id="product-table">
+                                <% if (stickers.length !=0) { %>
+                                    <th>Sticker Name</th>
+                                    <th>ID</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Actions</th>
+                                    <% for( let i=0; i < stickers.length; i++ ) { %>
+                                        <% const sticker=stickers[i]; %>
+                                            <tr>
+                                                <td>
+                                                    <%= sticker.name %>
+                                                </td>
+                                                <td>
+                                                    <%= sticker.id %>
+                                                </td>
+                                                <td>
+                                                    <%= readablePrice(sticker.priceInCents) %>
+                                                </td>
+                                                <td>
+                                                    <%= sticker.isInStock %>
+                                                </td>
+                                                <td>
+                                                    <a href="/stickers/<%= sticker.id %>">open</a>
+                                                    <a href="/edit/<%= sticker.id %>">edit</a>
+                                                    <button onclick="deleteSticker(`<%= sticker.id %>`)">delete</button>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                <% } else { %>
+                                    <th>Oh no!</th>
+                                    <tr>
+                                        <td>No Items in list. Maybe <a href="/create">cweate</a> one! :3
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            </table>
+                            <ol id="product-list">
+                                <% if (stickers.length !=0) { %>
+                                    <% for( let i=0; i < stickers.length; i++ ) { %>
+                                        <% const sticker=stickers[i]; %>
+                                            <li>
+                                                <ul>
+                                                    <li>
+                                                        <%= sticker.name %>
+                                                    </li>
+                                                    <li>
+                                                        <%= sticker.id %>
+                                                    </li>
+                                                    <li>
+                                                        <%= readablePrice(sticker.priceInCents) %>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/stickers/<%= sticker.id %>">open</a>
+                                                        <a href="/edit/<%= sticker.id %>">edit</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        <% } %>
+                                <% } else { %>
+                                    <li>No Items in list. Maybe <a href="/create">cweate</a> one! :3
+                                    </li>
+                                <% } %>
+                            </ol>
+                        </div>
+                        <script>
+                            async function deleteSticker(sticker) {
+                                deleteConfirmation = confirm("Are you sure you want to delete the sticker?")
+                                if (deleteConfirmation === true) {
+                                    await fetch(`/delete/${sticker}`).then(() => location.reload(true))
+                                } else {
+                                    console.log(`${sticker} has not been deleted.`)
+                                }
+                            }
+                        </script>
+                        <% } else { %>
+                            <form action="/admin/auth" method="POST">
+                                <label for="pwd">Password:</label>
+                                <input name="pwd" placeholder="Enter Admin Password" id="pwd" type="password">
+                                <button type="submit">Log-in</button>
+                            </form>
+                            <% } %>
+                </div>
+            </main>
+            <%- include('includes/footer') %>
+    </body>
+</html>

@@ -159,8 +159,7 @@ app.get('/delete/:id', async (request, response) => {     //Route to get sticker
   try {
     const stickerId = request.params.id
     await Sticker.findOneAndDelete({ id: stickerId })
-      .then(console.log(`${stickerId} has been deleted`))
-    response.redirect(`/stickers`)
+    response.redirect(`/admin`)
   } catch (error) {
     console.log(error)
   }
@@ -172,6 +171,20 @@ app.get("/plans", (request, response) => {
 
 app.get("/legal", (request, response) => {
   response.render('legal')
+})
+
+app.get('/admin', async (request, response) => {     // Sticker-list Route
+  const stickerList = await Sticker.find({}).exec()
+  response.render('adminpanel', { stickers: stickerList, readablePrice: readablePrice, isAuthenticated: false })
+})
+
+app.post('/admin/auth', async (request, response) => {
+  const input = request.body['pwd']
+  console.log(input)
+  if (input === process.env.ADMINPWD) {
+    const stickerList = await Sticker.find({}).exec()
+    response.render('adminpanel', { stickers: stickerList, readablePrice: readablePrice, isAuthenticated: true })
+  }
 })
 
 app.all('*', (request, response) => {
