@@ -289,6 +289,47 @@ footer {
 }
 /* End Error Page */
 
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right: 0;
+    background-color: var(--inverse-on-surface); 
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  .sidenav button {
+    margin: 8px 8px 8px 32px;
+  }
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: var(--inverse-surface); 
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+
 /* Test Animation for header */
 @keyframes headerHoverAnimation {
     0% {box-shadow: 0px 0px 0px #28313312;}
@@ -422,6 +463,18 @@ footer {
     #product-list{
         display: none;
     }
+
+    #side-menu-home{
+        display: none
+    }
+
+    #side-menu-plans{
+        display: none
+    }
+
+    #side-menu-stickers{
+        display: none
+    }
 }
 
 /* Large (L) (Desktop Screensize) */
@@ -442,6 +495,10 @@ footer {
 
     #product-list{
         display: none;
+    }
+
+    #mysidenav{
+        display:none
     }
 }
 

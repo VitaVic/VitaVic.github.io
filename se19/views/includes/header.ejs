@@ -1,4 +1,12 @@
 <header>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a id="side-menu-home" href="/home">Home</a>
+        <a id="side-menu-plans" href="/plans">Plans</a>
+        <a id="side-menu-stickers" href="/stickers">Stickers</a>
+        <a id="side-menu-profile" href="#">Profile</a>
+        <button id="side-menu-switch"><span class="material-icons">toggle_off</span></button>
+    </div>
     <img class="nav-logo-L" src="/images/Logo.png" alt="fwiendly Logo: Smiling cat with fwiendly text next to it.">
     <img class="nav-logo-XS-M" src="/images/CatOnlyLogo.png"
         alt="fwiendly Logo: Smiling cat with fwiendly text next to it.">
@@ -14,7 +22,18 @@
                 class="material-icons">shopping_basket</span></button>
         <button id="profile-button" onclick="openTab(event, 'Profile')"><span
                 class="material-icons">account_circle</span></button>
-        <button id="menu-button" onclick="openTab(event, 'Menu')"><span class="material-icons">menu</span></button>
+        <button id="menu-button" onclick="openNav()"><span class="material-icons">menu</span></button>
     </div>
     </div>
+    <script>
+        /* Set the width of the side navigation to 250px */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 </header>
