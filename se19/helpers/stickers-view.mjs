@@ -1,3 +1,3 @@
 export const readablePrice = (priceInCents) => {
-    return '$' + (priceInCents / 100 )
-  }
+  return '$' + (priceInCents / 100)
+}
